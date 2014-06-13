@@ -53,26 +53,14 @@ EVAL_BOUNDS = Bounds(LAT_MIN, LAT_MAX, LON_MIN, LON_MAX, START, END)
 ref_dataset = dsp.normalize_dataset_datetimes(ref_dataset, 'monthly')
 target_datasets = [dsp.normalize_dataset_datetimes(target, 'monthly')
                    for target in target_datasets]
-#target_dataset = dsp.normalize_dataset_datetimes(target_dataset, "monthly")
-#target_dataset2 = dsp.normalize_dataset_datetimes(target_dataset2, "monthly")
-#target_dataset3 = dsp.normalize_dataset_datetimes(target_dataset3, "monthly")
-#target_dataset4 = dsp.normalize_dataset_datetimes(target_dataset4, "monthly")
 
 # Subset down the evaluation datasets to our selected evaluation bounds.
 ref_dataset = dsp.subset(EVAL_BOUNDS, ref_dataset)
-#target_dataset = dsp.subset(EVAL_BOUNDS, target_dataset)
-#target_dataset2 = dsp.subset(EVAL_BOUNDS, target_dataset2)
-#target_dataset3 = dsp.subset(EVAL_BOUNDS, target_dataset3)
-#target_dataset4 = dsp.subset(EVAL_BOUNDS, target_dataset4)
 target_datasets = [dsp.subset(EVAL_BOUNDS, target)
                    for target in target_datasets]
 
 # Do a monthly temporal rebin of the evaluation datasets.
 ref_dataset = dsp.temporal_rebin(ref_dataset, datetime.timedelta(days=30))
-#target_dataset = dsp.temporal_rebin(target_dataset, datetime.timedelta(days=30))
-#target_dataset2 = dsp.temporal_rebin(target_dataset2, datetime.timedelta(days=30))
-#target_dataset3 = dsp.temporal_rebin(target_dataset3, datetime.timedelta(days=30))
-#target_dataset4 = dsp.temporal_rebin(target_dataset4, datetime.timedelta(days=30))
 target_datasets = [dsp.temporal_rebin(target, datetime.timedelta(days=30))
                    for target in target_datasets]
 
@@ -80,10 +68,6 @@ target_datasets = [dsp.temporal_rebin(target, datetime.timedelta(days=30))
 new_lats = np.arange(LAT_MIN, LAT_MAX, 1.0)
 new_lons = np.arange(LON_MIN, LON_MAX, 1.0)
 ref_dataset = dsp.spatial_regrid(ref_dataset, new_lats, new_lons)
-#target_dataset = dsp.spatial_regrid(target_dataset, new_lats, new_lons)
-#target_dataset2 = dsp.spatial_regrid(target_dataset2, new_lats, new_lons)
-#target_dataset3 = dsp.spatial_regrid(target_dataset3, new_lats, new_lons)
-#target_dataset4 = dsp.spatial_regrid(target_dataset4, new_lats, new_lons)
 target_datasets = [dsp.spatial_regrid(target, new_lats, new_lons)
                    for target in target_datasets]
 
